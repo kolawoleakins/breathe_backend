@@ -34,7 +34,7 @@ class ProductController extends Controller
         ]);
 
         $image = time().'.'.$request->image->extension();  
-        $request->image->move(public_path('uploads'), $image);
+        $request->image->move(public_path('products'), $image);
 
         
         $product  = new Products();
@@ -61,7 +61,7 @@ class ProductController extends Controller
 
         
         $image = time().'.'.$request->image->extension();  
-        $request->image->move(public_path('uploads'), $image);
+        $request->image->move(public_path('products'), $image);
         
         $product  = Products::find($id);
         if($product):
