@@ -22,9 +22,9 @@ class AuthController extends Controller
             "state"=> "required|string",
             "facilityaddress"=> "required|string",
             "homeaddress"=> "required|string",
-            "facilityid"=> "required|mimes:jpg,jpeg,png",
-            "regulatoryid"=> "required|mimes:jpg,jpeg,png",
-            "bvn"=> "required|string",
+            // "facilityid"=> "required|mimes:jpg,jpeg,png",
+            // "regulatoryid"=> "required|mimes:jpg,jpeg,png",
+            // "bvn"=> "required|string",
             "nin"=> "required|string",
             "password"=> "required|string|confirmed|min:6",
         ]);
