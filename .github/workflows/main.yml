@@ -14,5 +14,5 @@ jobs:
         uses: SamKirkLand/FTP-Deploy-Action@3.1.1
         with: 
           ftp-server: ftp.app.breathe.africa
-          ftp-username: breamxio
+          ftp-username: breamxio@app.breathe.africa
           ftp-password : RhCzWbuBnOP2
