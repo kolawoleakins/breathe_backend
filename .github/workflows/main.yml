@@ -13,6 +13,6 @@ jobs:
       - name: FTP-Deploy-Action
         uses: SamKirkLand/FTP-Deploy-Action@3.1.1
         with: 
-          ftp-server: ftp.app.breathe.africa
+          ftp-server: ftp.breathe.africa
           ftp-username: breamxio@app.breathe.africa
           ftp-password : RhCzWbuBnOP2
