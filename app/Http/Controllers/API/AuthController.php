@@ -52,8 +52,8 @@ class AuthController extends Controller
         }
         
 
-        $regulatoryid = time().'.'.$request->regulatoryid->extension();  
-        $request->regulatoryid->move(public_path('uploads'), $regulatoryid);
+        // $regulatoryid = time().'.'.$request->regulatoryid->extension();  
+        // $request->regulatoryid->move(public_path('uploads'), $regulatoryid);
 
 
         $user = User::create([
