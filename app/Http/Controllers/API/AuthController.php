@@ -29,8 +29,28 @@ class AuthController extends Controller
             "password"=> "required|string|confirmed|min:6",
         ]);
 
-        $facilityid = time().'.'.$request->facilityid->extension();  
-        $request->facilityid->move(public_path('uploads'), $facilityid);
+
+        $bvn = "";
+        if(!isset($request->bvn) || empty($request->bvn)){
+            $bvn = "";
+        }else{
+            $bvn = $request->bvn;
+        }
+
+        if(!empty($request->facilityid)){
+            $facilityid = time().'.'.$request->facilityid->extension();  
+            $request->facilityid->move(public_path('uploads'), $facilityid);
+        }else{
+            $facilityid = "";
+        }
+        
+        if(!empty($request->regulatoryid)){
+            $regulatoryid = time().'.'.$request->regulatoryid->extension();  
+            $request->regulatoryid->move(public_path('uploads'), $regulatoryid);
+        }else{
+            $regulatoryid = "";
+        }
+        
 
         $regulatoryid = time().'.'.$request->regulatoryid->extension();  
         $request->regulatoryid->move(public_path('uploads'), $regulatoryid);
@@ -47,7 +67,7 @@ class AuthController extends Controller
             "homeaddress"=>$data['homeaddress'],
             "facilityid"=>$facilityid,
             "regulatoryid"=>$regulatoryid,
-            "bvn"=>$data['bvn'],
+            "bvn"=>$bvn,
             "nin"=>$data['nin'],
             "password"=>Hash::make($data['password']),
         ]);
