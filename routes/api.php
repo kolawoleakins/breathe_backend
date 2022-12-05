@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\API\CheckoutController;
+use App\Http\Controllers\API\NotificationsController;
 use App\Http\Controllers\API\ProductController;
 use Illuminate\Support\Facades\Route;
 
@@ -45,7 +46,15 @@ Route::middleware('auth:sanctum')->prefix('v1')->group(function(){
 
     Route::post('verifypayment', [CheckoutController::class, 'checkpayment']);
 
+    #orders
+    Route::get('orders', [CheckoutController::class, 'orders']);
 
+
+    #notifications
+    Route::get('notifications', [NotificationsController::class, 'notifications']);
+
+    #notifications
+    Route::get('notification/{id}/view', [NotificationsController::class, 'viewnotification']);
 
 });
 

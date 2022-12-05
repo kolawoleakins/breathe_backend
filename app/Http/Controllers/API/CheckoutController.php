@@ -97,4 +97,17 @@ class CheckoutController extends Controller
 
     }
 
+    public function orders(){
+        
+        $orders = Checkout::where('userid', Auth::id())->get();
+
+        if($orders):
+            return response()->json(["orders"=>$orders], 200);
+        else:
+            return response()->json(["message"=>"No Record Found"], 404);
+        endif;        
+    
+    }
+
+
 }
