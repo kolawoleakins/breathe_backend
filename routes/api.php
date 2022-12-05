@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\API\AuthController;
+use App\Http\Controllers\API\CheckoutController;
 use App\Http\Controllers\API\ProductController;
 use Illuminate\Support\Facades\Route;
 
@@ -40,7 +41,9 @@ Route::middleware('auth:sanctum')->prefix('v1')->group(function(){
 
     Route::delete('products/{id}/delete', [ProductController::class, 'destroy']);
 
-    
+    Route::post('checkout', [CheckoutController::class, 'index']);
+
+    Route::post('verifypayment', [CheckoutController::class, 'checkpayment']);
 
 
 

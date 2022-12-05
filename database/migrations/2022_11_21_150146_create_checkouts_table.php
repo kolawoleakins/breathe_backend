@@ -15,6 +15,20 @@ class CreateCheckoutsTable extends Migration
     {
         Schema::create('checkouts', function (Blueprint $table) {
             $table->id();
+            $table->string('orderid');
+            $table->string('userid');
+            $table->string('address');
+            $table->string('phone');
+            $table->string('item_id');
+            $table->string('item_name');
+            $table->float('price');
+            $table->integer('quantity');
+            $table->string('preference');
+            $table->enum('ordertype', ['express','normal'])->default('normal');
+            $table->boolean('is_paid')->default(false);
+            $table->string('payment_method')->nullable();
+            $table->string('transaction_reference')->nullable();
+            $table->enum('status', ['pending','processing','completed','decline'])->default('pending');
             $table->timestamps();
         });
     }
