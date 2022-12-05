@@ -75,7 +75,8 @@ class CheckoutController extends Controller
                     "userid"=>Auth::user()->id,
                     "orderid"=>$request->orderid,
                     "address"=>$address->address,
-                    "orderdate"=>Date('y/m/d H-I-s'),
+                    "orderdate"=>Date('Y-m-d H:i:s'),
+                    "arrivaldate"=> date('Y-m-d H:i:s', strtotime(' + 7 hours'))
                 ]);
         
                 //add notification
@@ -103,6 +104,19 @@ class CheckoutController extends Controller
 
         if($orders):
             return response()->json(["orders"=>$orders], 200);
+        else:
+            return response()->json(["message"=>"No Record Found"], 404);
+        endif;        
+    
+    }
+
+    public function orderdetail(Request $request){
+        
+        $orders = Checkout::where('userid', Auth::id())
+        ->where('orderid',$request->orderid)->get();
+
+        if($orders):
+            return response()->json(["order"=>$orders], 200);
         else:
             return response()->json(["message"=>"No Record Found"], 404);
         endif;        

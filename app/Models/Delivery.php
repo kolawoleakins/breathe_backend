@@ -12,6 +12,7 @@ class Delivery extends Model
         'orderid',
         'userid',
         'orderdate',
-        'arrivaldate'
+        'arrivaldate',
+        'address'
     ];
 }
