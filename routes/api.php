@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\API\CheckoutController;
 use App\Http\Controllers\API\DeliveryController;
+use App\Http\Controllers\API\HistoryController;
 use App\Http\Controllers\API\NotificationsController;
 use App\Http\Controllers\API\ProductController;
 use Illuminate\Support\Facades\Route;
@@ -62,6 +63,16 @@ Route::middleware('auth:sanctum')->prefix('v1')->group(function(){
     
     #arrival
     Route::post('arrival', [DeliveryController::class, 'arrival']);
+
+
+    #wallet
+
+
+
+    #History
+    Route::get('history', [HistoryController::class, 'history']);
+
+    Route::get('history/{id}/view', [HistoryController::class, 'historydetail']);
 
 });
 
