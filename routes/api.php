@@ -5,8 +5,11 @@ use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\API\CheckoutController;
 use App\Http\Controllers\API\DeliveryController;
 use App\Http\Controllers\API\HistoryController;
+use App\Http\Controllers\API\AccountController;
 use App\Http\Controllers\API\NotificationsController;
 use App\Http\Controllers\API\ProductController;
+use App\Http\Controllers\API\VoucherController;
+use App\Http\Controllers\API\WalletController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -49,30 +52,59 @@ Route::middleware('auth:sanctum')->prefix('v1')->group(function(){
     Route::post('verifypayment', [CheckoutController::class, 'checkpayment']);
 
     #orders
-    Route::get('orders', [CheckoutController::class, 'orders']);
+        Route::get('orders', [CheckoutController::class, 'orders']);
 
-    Route::post('orderdetail', [CheckoutController::class, 'orderdetail']);
+        Route::post('orderdetail', [CheckoutController::class, 'orderdetail']);
 
-
-    #notifications
-    Route::get('notifications', [NotificationsController::class, 'notifications']);
 
     #notifications
-    Route::get('notification/{id}/view', [NotificationsController::class, 'viewnotification']);
+        Route::get('notifications', [NotificationsController::class, 'notifications']);
+
+    #notifications
+        Route::get('notification/{id}/view', [NotificationsController::class, 'viewnotification']);
 
     
     #arrival
-    Route::post('arrival', [DeliveryController::class, 'arrival']);
+        Route::post('arrival', [DeliveryController::class, 'arrival']);
 
 
     #wallet
+        Route::post('wallet/fund', [WalletController::class, 'fundwallet']);
+
+        Route::get('wallet/view', [WalletController::class, 'viewwallet']);
 
 
 
     #History
-    Route::get('history', [HistoryController::class, 'history']);
+        Route::get('history', [HistoryController::class, 'history']);
 
-    Route::get('history/{id}/view', [HistoryController::class, 'viewhistory']);
+        Route::get('history/{id}/view', [HistoryController::class, 'viewhistory']);
+
+    
+    #Account
+        Route::get('profile', [AccountController::class, 'profile']);    
+
+        Route::post('profile/update', [AccountController::class, 'updateprofile']);
+
+        Route::post('profile/password/update', [AccountController::class, 'updatepassword']);
+
+        Route::post('profile/bvn/update', [AccountController::class, 'updatebvn']);
+
+        Route::post('profile/idcards/update', [AccountController::class, 'updateid']);
+    
+        Route::post('profile/account/close', [AccountController::class, 'closeaccount']);
+
+
+    #Voucher
+
+        Route::post('voucher/create', [VoucherController::class, 'store']);
+        
+        Route::get('voucher/view', [VoucherController::class, 'index']);
+
+        Route::post('voucher/{id}/update', [VoucherController::class, 'update']);
+
+        Route::delete('voucher/{id}/delete', [VoucherController::class, 'destroy']);
+
 
 });
 

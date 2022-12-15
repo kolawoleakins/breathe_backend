@@ -6,9 +6,11 @@ use App\Http\Controllers\Controller;
 use App\Mail\PasswordVerify;
 use App\Models\User;
 use App\Models\VerificationCodes;
+use App\Models\Wallet;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\DB;
 
 class AuthController extends Controller
 {
@@ -56,7 +58,23 @@ class AuthController extends Controller
         // $request->regulatoryid->move(public_path('uploads'), $regulatoryid);
 
 
-        $user = User::create([
+        // $user = User::create([
+        //     "name"=>$data['name'],
+        //     "email"=>$data['email'],
+        //     "phone"=>$data['phone'],
+        //     "usertype"=>$data['usertype'],
+        //     "userlocation"=>$data['userlocation'],
+        //     "state"=>$data['state'],
+        //     "facilityaddress"=>$data['facilityaddress'],
+        //     "homeaddress"=>$data['homeaddress'],
+        //     "facilityid"=>$facilityid,
+        //     "regulatoryid"=>$regulatoryid,
+        //     "bvn"=>$bvn,
+        //     "nin"=>$data['nin'],
+        //     "password"=>Hash::make($data['password']),
+        // ]);
+
+        $user = DB::table('users')->insertGetId([
             "name"=>$data['name'],
             "email"=>$data['email'],
             "phone"=>$data['phone'],
@@ -72,11 +90,18 @@ class AuthController extends Controller
             "password"=>Hash::make($data['password']),
         ]);
 
-        $token = $user->createToken('Breet')->plainTextToken;
+        Wallet::create([
+            'userid'=>$user,
+            'balance'=>0,
+            
+        ]);
+
+
+        // $token = $user->createToken('Breet')->plainTextToken;
 
         $response = [
-            'user' => $user,
-            'token' => $token
+            'message' => "Registered Successfully",
+            // 'token' => $token
         ];
 
         return response($response, 201);
