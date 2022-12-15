@@ -23,10 +23,24 @@ class HistoryController extends Controller
         ->get();
 
         if($orders):
-            return response()->json(["orders"=>$orders], 200);
+            return response()->json(["history"=>$orders], 200);
         else:
             return response()->json(["message"=>"No Record Found"], 404);
         endif;       
     
     }
+
+    public function viewhistory($id){
+
+        $orders = Checkout::where('userid', Auth::id())
+        ->where('orderid',$id)->get();
+
+        if($orders):
+            return response()->json(["history"=>$orders], 200);
+        else:
+            return response()->json(["message"=>"No Record Found"], 404);
+        endif;  
+     
+    }
+
 }

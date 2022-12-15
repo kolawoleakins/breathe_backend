@@ -72,7 +72,7 @@ Route::middleware('auth:sanctum')->prefix('v1')->group(function(){
     #History
     Route::get('history', [HistoryController::class, 'history']);
 
-    Route::get('history/{id}/view', [HistoryController::class, 'historydetail']);
+    Route::get('history/{id}/view', [HistoryController::class, 'viewhistory']);
 
 });
 
