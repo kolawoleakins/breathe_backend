@@ -124,4 +124,27 @@ class CheckoutController extends Controller
     }
 
 
+    public function adminoverview(){
+        if(Auth::user()->user_is == "admin"){
+            $pending = Checkout::where('status', "pending")->count();
+            $processing = Checkout::where('status', "processing")->count();
+            $delivered = Checkout::where('status', "delivered")->count();
+            $rejected = Checkout::where('status', "rejected")->count();
+            $escalated = Checkout::where('status', "escalated")->count();
+
+            return response()->json(
+            [
+                "pending"=>$pending,
+                "processing"=>$processing,
+                "delivered"=>$delivered,
+                "rejected"=>$rejected,
+                "escalated"=>$escalated,
+            ], 200);
+
+        }else{
+            return response()->json(["message"=>"Error"], 401);
+        }
+    }
+
+
 }
