@@ -27,6 +27,7 @@ class CreateUsersTable extends Migration
             $table->string('regulatoryid')->nullable();
             $table->string('bvn')->nullable();
             $table->string('nin')->nullable();
+            $table->string('user_is')->default("customer");
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();

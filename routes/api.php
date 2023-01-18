@@ -63,7 +63,6 @@ Route::middleware('auth:sanctum')->prefix('v1')->group(function(){
     #notifications
         Route::get('notification/{id}/view', [NotificationsController::class, 'viewnotification']);
 
-    
     #arrival
         Route::post('arrival', [DeliveryController::class, 'arrival']);
 
@@ -72,8 +71,6 @@ Route::middleware('auth:sanctum')->prefix('v1')->group(function(){
         Route::post('wallet/fund', [WalletController::class, 'fundwallet']);
 
         Route::get('wallet/view', [WalletController::class, 'viewwallet']);
-
-
 
     #History
         Route::get('history', [HistoryController::class, 'history']);
