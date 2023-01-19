@@ -202,7 +202,6 @@ class AuthController extends Controller
             "phone"=> "required|string",
             "userlocation"=> "required|string",
             "state"=> "required|string",
-            "nin"=> "required|string",
             "password"=> "required|string|confirmed|min:6",
         ]);
 
@@ -227,15 +226,16 @@ class AuthController extends Controller
             "name"=>$data['name'],
             "email"=>$data['email'],
             "phone"=>$data['phone'],
-            "usertype"=>$data['usertype'],
+            "usertype"=>"team",
             "userlocation"=>$data['userlocation'],
             "state"=>$data['state'],
-            "facilityaddress"=>$data['facilityaddress'],
-            "homeaddress"=>$data['homeaddress'],
+            "facilityaddress"=>"nill",
+            "homeaddress"=>"nill",
             "facilityid"=>$facilityid,
             "regulatoryid"=>$regulatoryid,
             "bvn"=>$bvn,
-            "nin"=>$data['nin'],
+            "nin"=>"nill",
+            "user_is"=>"team",
             "password"=>Hash::make($data['password']),
         ]);
 
@@ -249,7 +249,7 @@ class AuthController extends Controller
         // $token = $user->createToken('Breet')->plainTextToken;
 
         $response = [
-            'message' => "Registered Successfully",
+            'message' => "Team created successfully",
             // 'token' => $token
         ];
 
