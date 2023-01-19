@@ -24,6 +24,7 @@ class CreateCheckoutsTable extends Migration
             $table->float('price');
             $table->integer('quantity');
             $table->string('preference');
+            $table->string('assign')->default("not assigned");
             $table->enum('ordertype', ['express','normal'])->default('normal');
             $table->boolean('is_paid')->default(false);
             $table->string('payment_method')->nullable();
