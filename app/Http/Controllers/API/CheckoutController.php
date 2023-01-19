@@ -161,5 +161,20 @@ class CheckoutController extends Controller
         }
     }
 
+    public function adminorderdetail(Request $request){
+        if(Auth::user()->user_is == "admin"){
+            $orders = Checkout::where('orderid',$request->orderid)->get();
+
+            if($orders):
+                return response()->json(["order"=>$orders], 200);
+            else:
+                return response()->json(["message"=>"No Record Found"], 404);
+            endif;  
+
+        }else{
+            return response()->json(["message"=>"Error"], 401);
+        }
+    }
+
 
 }

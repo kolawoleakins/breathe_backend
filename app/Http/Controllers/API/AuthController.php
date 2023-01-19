@@ -193,4 +193,69 @@ class AuthController extends Controller
         return response(["message"=>"Logged out successfully"]);
     }
 
+
+    ###admin section
+    public function createteam(Request $request){
+        $data = $request->validate([
+            "name" => 'required|string|max:191',
+            "email"=> 'required|string|max:191|unique:users,email',
+            "phone"=> "required|string",
+            "userlocation"=> "required|string",
+            "state"=> "required|string",
+            "nin"=> "required|string",
+            "password"=> "required|string|confirmed|min:6",
+        ]);
+
+
+        $bvn = "";
+
+        if(!empty($request->facilityid)){
+            $facilityid = time().'.'.$request->facilityid->extension();  
+            $request->facilityid->move(public_path('uploads'), $facilityid);
+        }else{
+            $facilityid = "";
+        }
+        
+        if(!empty($request->regulatoryid)){
+            $regulatoryid = time().'.'.$request->regulatoryid->extension();  
+            $request->regulatoryid->move(public_path('uploads'), $regulatoryid);
+        }else{
+            $regulatoryid = "";
+        }
+
+        $user = DB::table('users')->insertGetId([
+            "name"=>$data['name'],
+            "email"=>$data['email'],
+            "phone"=>$data['phone'],
+            "usertype"=>$data['usertype'],
+            "userlocation"=>$data['userlocation'],
+            "state"=>$data['state'],
+            "facilityaddress"=>$data['facilityaddress'],
+            "homeaddress"=>$data['homeaddress'],
+            "facilityid"=>$facilityid,
+            "regulatoryid"=>$regulatoryid,
+            "bvn"=>$bvn,
+            "nin"=>$data['nin'],
+            "password"=>Hash::make($data['password']),
+        ]);
+
+        Wallet::create([
+            'userid'=>$user,
+            'balance'=>0,
+            
+        ]);
+
+
+        // $token = $user->createToken('Breet')->plainTextToken;
+
+        $response = [
+            'message' => "Registered Successfully",
+            // 'token' => $token
+        ];
+
+        return response($response, 201);
+
+
+    }
+
 }

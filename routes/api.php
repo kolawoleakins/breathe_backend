@@ -108,6 +108,10 @@ Route::middleware('auth:sanctum')->prefix('v1')->group(function(){
 
         #orders
         Route::get('admin/orders', [CheckoutController::class, 'adminorders']);
+        Route::post('admin/orderdetail', [CheckoutController::class, 'adminorderdetail']);
+
+        #Team
+        Route::post('admin/createteam', [AuthController::class, 'createteam']);
 
 
 });
