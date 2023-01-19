@@ -103,6 +103,13 @@ Route::middleware('auth:sanctum')->prefix('v1')->group(function(){
         Route::delete('voucher/{id}/delete', [VoucherController::class, 'destroy']);
 
 
+    #Admin Route
+        Route::get('admin/overview', [CheckoutController::class, 'adminoverview']);
+
+        #orders
+        Route::get('admin/orders', [CheckoutController::class, 'adminorders']);
+
+
 });
 
 
