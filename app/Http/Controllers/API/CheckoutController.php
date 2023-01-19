@@ -138,7 +138,7 @@ class CheckoutController extends Controller
                 "processing"=>$processing,
                 "delivered"=>$delivered,
                 "rejected"=>$rejected,
-                "escalated"=>$escalated,
+                "escalated"=>$escalated
             ], 200);
 
         }else{
