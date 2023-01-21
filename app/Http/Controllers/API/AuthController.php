@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Models\VerificationCodes;
 use App\Models\Wallet;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\DB;
@@ -215,12 +216,14 @@ class AuthController extends Controller
             $facilityid = "";
         }
         
+        
         if(!empty($request->regulatoryid)){
             $regulatoryid = time().'.'.$request->regulatoryid->extension();  
             $request->regulatoryid->move(public_path('uploads'), $regulatoryid);
         }else{
             $regulatoryid = "";
         }
+        
 
         $user = DB::table('users')->insertGetId([
             "name"=>$data['name'],
@@ -254,8 +257,19 @@ class AuthController extends Controller
         ];
 
         return response($response, 201);
+    }
 
-
+    public function viewteam(){
+        if(Auth::user()->user_is == "admin"){
+            $teams = User::where('user_is',"team")->get();
+            if($teams):
+                return response()->json(["team"=>$teams], 200);
+            else:
+                return response()->json(["message"=>"No Record Found"], 404);
+            endif;  
+        }else{
+            return response()->json(["message"=>"Error"], 401);
+        } 
     }
 
 }

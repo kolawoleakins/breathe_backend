@@ -112,6 +112,7 @@ Route::middleware('auth:sanctum')->prefix('v1')->group(function(){
 
         #Team
         Route::post('admin/createteam', [AuthController::class, 'createteam']);
+        Route::get('admin/viewteam', [AuthController::class, 'viewteam']);  
 
 
 });
