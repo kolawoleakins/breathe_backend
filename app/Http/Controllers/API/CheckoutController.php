@@ -170,11 +170,8 @@ class CheckoutController extends Controller
             else:
                 return response()->json(["message"=>"No Record Found"], 404);
             endif;  
-
         }else{
-
             return response()->json(["message"=>"Error"], 401);
-            
         }
     }
 
